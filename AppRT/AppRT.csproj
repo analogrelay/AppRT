@@ -139,51 +139,67 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.10\lib\winrt45\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ReactiveUI.Routing_WinRT">
       <HintPath>..\packages\reactiveui-winrt.3.2.0\lib\WinRT45\ReactiveUI.Routing_WinRT.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ReactiveUI.Xaml_WinRT">
       <HintPath>..\packages\reactiveui-winrt.3.2.0\lib\WinRT45\ReactiveUI.Xaml_WinRT.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ReactiveUI_WinRT">
       <HintPath>..\packages\reactiveui-winrt.3.2.0\lib\WinRT45\ReactiveUI_WinRT.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Composition.AttributedModel">
       <HintPath>..\packages\Microsoft.Composition.1.0.16\lib\netcore45\System.Composition.AttributedModel.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Composition.Convention">
       <HintPath>..\packages\Microsoft.Composition.1.0.16\lib\netcore45\System.Composition.Convention.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Composition.Hosting">
       <HintPath>..\packages\Microsoft.Composition.1.0.16\lib\netcore45\System.Composition.Hosting.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Composition.Runtime">
       <HintPath>..\packages\Microsoft.Composition.1.0.16\lib\netcore45\System.Composition.Runtime.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Composition.TypedParts">
       <HintPath>..\packages\Microsoft.Composition.1.0.16\lib\netcore45\System.Composition.TypedParts.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Reactive.Core">
       <HintPath>..\packages\reactiveui-winrt.3.2.0\lib\WinRT45\System.Reactive.Core.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Reactive.Interfaces">
       <HintPath>..\packages\reactiveui-winrt.3.2.0\lib\WinRT45\System.Reactive.Interfaces.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Reactive.Linq">
       <HintPath>..\packages\reactiveui-winrt.3.2.0\lib\WinRT45\System.Reactive.Linq.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Reactive.PlatformServices">
       <HintPath>..\packages\reactiveui-winrt.3.2.0\lib\WinRT45\System.Reactive.PlatformServices.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Reactive.Windows.Threading">
       <HintPath>..\packages\reactiveui-winrt.3.2.0\lib\WinRT45\System.Reactive.Windows.Threading.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Reactive.WindowsRuntime">
       <HintPath>..\packages\reactiveui-winrt.3.2.0\lib\WinRT45\System.Reactive.WindowsRuntime.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="WinRtBehaviors">
       <HintPath>..\packages\WinRtBehaviors.1.0.2\lib\winrt45\WinRtBehaviors.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -201,6 +217,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <Import Project="$(MSBuildProjectDirectory)\..\.nuget\nuget.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
