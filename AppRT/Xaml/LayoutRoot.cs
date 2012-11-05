@@ -18,6 +18,8 @@ namespace AppRT.Xaml
             "PageTitle", typeof(string), typeof(LayoutRoot), new PropertyMetadata(String.Empty));
         public static readonly DependencyProperty ShowProgressAnimationProperty = DependencyProperty.Register(
             "ShowProgressAnimation", typeof(bool), typeof(LayoutRoot), new PropertyMetadata(false));
+        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
+            "Header", typeof(object), typeof(LayoutRoot), new PropertyMetadata(null));
         
         public string PageTitle
         {
@@ -29,6 +31,12 @@ namespace AppRT.Xaml
         {
             get { return (bool)GetValue(ShowProgressAnimationProperty); }
             set { SetValue(ShowProgressAnimationProperty, value); }
+        }
+
+        public object Header
+        {
+            get { return GetValue(HeaderProperty); }
+            set { SetValue(HeaderProperty, value); }
         }
 
         public LayoutRoot()

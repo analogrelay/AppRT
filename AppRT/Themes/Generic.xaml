@@ -5,16 +5,6 @@
     
     <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
-    <Style TargetType="local:ViewPage">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="local:ViewPage">
-                    
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <Style TargetType="local:LayoutRoot">
         <Setter Property="Background" Value="{StaticResource ApplicationPageBackgroundThemeBrush}" />
         <Setter Property="Template">
@@ -37,6 +27,7 @@
                             <Button Style="{StaticResource BackButtonStyle}" Command="{Binding DataContext.GoBackCommand, RelativeSource={RelativeSource TemplatedParent}}" />
                             <ProgressBar Grid.ColumnSpan="2" VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding ShowProgressAnimation, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
                             <TextBlock Grid.Column="1" Style="{StaticResource PageHeaderTextStyle}" Text="{TemplateBinding PageTitle}" />
+                            <ContentPresenter x:Name="PART_Header" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="{TemplateBinding Header}" />
                             <ContentPresenter Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                         </Grid>
                     </Border>
