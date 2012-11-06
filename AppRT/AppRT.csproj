@@ -104,6 +104,7 @@
     <Compile Include="ObservableExtensions.cs" />
     <Compile Include="ViewModels\RxUIExtensions.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
+    <Compile Include="Xaml\FloatToCurrencyStringConverter.cs" />
     <Compile Include="Xaml\LayoutRoot.cs" />
     <Compile Include="Xaml\Application.cs" />
     <Compile Include="ApplicationPlugin.cs" />
@@ -114,7 +115,6 @@
     <Compile Include="ViewModels\IInvocableViewModel.cs" />
     <Compile Include="Xaml\BooleanToVisibilityConverter.cs" />
     <Compile Include="Conventions\ConventionManager.cs" />
-    <Compile Include="DesignModeApplication.cs" />
     <Compile Include="DisplayNameAttribute.cs" />
     <Compile Include="Xaml\CommandBehavior.cs" />
     <Compile Include="Xaml\EnumValueConverter.cs" />

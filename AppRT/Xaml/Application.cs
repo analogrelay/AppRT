@@ -17,7 +17,6 @@ namespace AppRT.Xaml
 {
     public abstract class Application : Windows.UI.Xaml.Application
     {
-        private static DesignModeApplication _designModeApp;
         private IEnumerable<ApplicationPlugin> _plugins;
         private CompositionHost _container;
 
@@ -38,15 +37,7 @@ namespace AppRT.Xaml
 
         public static void SatisfyImports(object objectWithLooseImports)
         {
-            if (DesignMode.DesignModeEnabled)
-            {
-                if (_designModeApp == null)
-                {
-                    _designModeApp = new DesignModeApplication();
-                }
-                _designModeApp.SatisfyImports(objectWithLooseImports);
-            }
-            else
+            if (!DesignMode.DesignModeEnabled)
             {
                 var app = Windows.UI.Xaml.Application.Current as Application;
                 if (app == null)

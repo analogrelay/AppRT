@@ -27,8 +27,8 @@
                             <Button Style="{StaticResource BackButtonStyle}" Command="{Binding DataContext.GoBackCommand, RelativeSource={RelativeSource TemplatedParent}}" />
                             <ProgressBar Grid.ColumnSpan="2" VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding ShowProgressAnimation, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
                             <TextBlock Grid.Column="1" Style="{StaticResource PageHeaderTextStyle}" Text="{TemplateBinding PageTitle}" />
-                            <ContentPresenter x:Name="PART_Header" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="{TemplateBinding Header}" />
-                            <ContentPresenter Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                            <ContentPresenter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="{TemplateBinding Header}" />
+                            <ContentPresenter Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="{TemplateBinding Content}" />
                         </Grid>
                     </Border>
                 </ControlTemplate>
