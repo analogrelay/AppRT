@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
+using AppRT.Conventions;
+using AppRT.Xaml;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace AppRT.Services
 {
@@ -16,6 +19,11 @@ namespace AppRT.Services
     [Export]
     public class UIService
     {
+        [ImportingConstructor]
+        public UIService()
+        {
+        }
+
         public Task ShowMessageAsync(string message)
         {
             return ShowMessageAsyncCore(message, secondLevel: false);

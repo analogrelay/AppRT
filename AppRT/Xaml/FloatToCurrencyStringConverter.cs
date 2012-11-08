@@ -15,16 +15,34 @@ namespace AppRT.Xaml
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (typeof(float).GetTypeInfo().IsAssignableFrom(value.GetType().GetTypeInfo()) && targetType == typeof(string))
+            if (targetType == typeof(string))
             {
-                float f = (float)value;
-                if (IncludeCurrencySymbol)
+                float val;
+                if (value is float?)
                 {
-                    return String.Format("{0:c}", f);
+                    float? nullableVal = (float?)value;
+                    if (nullableVal == null)
+                    {
+                        return String.Empty;
+                    }
+                    val = nullableVal.Value;
+                }
+                else if (value is float)
+                {
+                    val = (float)value;
                 }
                 else
                 {
-                    return String.Format("{0:F2}", f);
+                    return value;
+                }
+
+                if (IncludeCurrencySymbol)
+                {
+                    return String.Format("{0:c}", val);
+                }
+                else
+                {
+                    return String.Format("{0:F2}", val);
                 }
             }
             return value;

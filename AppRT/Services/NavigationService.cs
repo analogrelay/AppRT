@@ -18,26 +18,20 @@ namespace AppRT.Services
     [Export(typeof(IMessageSink))]
     public class NavigationService : IMessageSink
     {
-        private Frame _rootFrame;
-
+        private HostService Host { get; set; }
         private ConventionManager Conventions { get; set; }
 
-        public bool CanGoBack { get { return _rootFrame.CanGoBack; } }
-        public bool CanGoForward { get { return _rootFrame.CanGoForward; } }
+        public bool CanGoBack { get { return Host.Frame.CanGoBack; } }
+        public bool CanGoForward { get { return Host.Frame.CanGoForward; } }
 
         [ImportingConstructor]
-        public NavigationService(ConventionManager conventions)
+        public NavigationService(HostService host, ConventionManager conventions)
         {
             Conventions = conventions;
         }
 
         public void Register(IMessageBus bus)
         {
-            // Listen for the message which attaches a frame.
-            bus.Listen<ApplicationSitedMessage>()
-               .ObserveOn(RxApp.DeferredScheduler)
-               .Subscribe(s => _rootFrame = s.RootFrame);
-
             // Listen for the message which has us navigate.
             bus.Listen<NavigateMessage>()
                .ObserveOn(RxApp.DeferredScheduler)
@@ -46,12 +40,12 @@ namespace AppRT.Services
 
         public void GoBack()
         {
-            _rootFrame.GoBack();
+            Host.Frame.GoBack();
         }
 
         public void GoForward()
         {
-            _rootFrame.GoForward();
+            Host.Frame.GoForward();
         }
 
         private void OnNavigateMessage(NavigateMessage msg)
@@ -59,13 +53,13 @@ namespace AppRT.Services
             switch (msg.Mode)
             {
                 case NavigationMode.Back:
-                    _rootFrame.GoBack();
+                    Host.Frame.GoBack();
                     break;
                 case NavigationMode.Forward:
-                    _rootFrame.GoForward();
+                    Host.Frame.GoForward();
                     break;
                 default:
-                    _rootFrame.Navigate(Conventions.ViewModelToView.GetViewForViewModel(msg.ViewModelType), msg.Parameter);
+                    Host.Frame.Navigate(Conventions.ViewModelToView.GetViewForViewModel(msg.ViewModelType), msg.Parameter);
                     break;
             }
         }
