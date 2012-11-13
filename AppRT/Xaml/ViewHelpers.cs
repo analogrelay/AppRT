@@ -9,6 +9,7 @@ using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
+using ReactiveUI;
 
 namespace AppRT.Xaml
 {
@@ -44,6 +45,10 @@ namespace AppRT.Xaml
             {
                 args.Request.ApplicationCommands.Add(command);
             }
+        }
+
+        static void OnLoaded<T>(T viewControl) where T : Control, IView
+        {
         }
     }
 }

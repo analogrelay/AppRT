@@ -27,6 +27,7 @@ namespace AppRT.Services
         [ImportingConstructor]
         public NavigationService(HostService host, ConventionManager conventions)
         {
+            Host = host;
             Conventions = conventions;
         }
 

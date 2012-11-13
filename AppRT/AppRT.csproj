@@ -101,7 +101,11 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Messaging\PopupHostReadyMessage.cs" />
     <Compile Include="ObservableExtensions.cs" />
+    <Compile Include="Services\HostService.cs" />
+    <Compile Include="Services\ObjectFactory.cs" />
+    <Compile Include="ViewModels\IDialogViewModel.cs" />
     <Compile Include="ViewModels\RxUIExtensions.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="Xaml\FloatToCurrencyStringConverter.cs" />
@@ -128,6 +132,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ServiceCenter.cs" />
     <Compile Include="Xaml\StateManager.cs" />
+    <Compile Include="Xaml\SwapView.cs" />
     <Compile Include="Xaml\ViewHelpers.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Conventions\ViewModelBuilder.cs" />
@@ -137,6 +142,9 @@
     <Compile Include="Xaml\ViewUserControl.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Callisto">
+      <HintPath>..\..\..\packages\Callisto.1.2.5\lib\winrt45\Callisto.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.10\lib\winrt45\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
@@ -217,6 +225,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <Import Project="$(MSBuildProjectDirectory)\..\.nuget\nuget.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

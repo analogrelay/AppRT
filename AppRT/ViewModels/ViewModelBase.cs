@@ -74,4 +74,14 @@ namespace AppRT.ViewModels
 
         protected abstract void OnInvoked(object parameter);
     }
+
+    public abstract class DialogViewModelBase : ViewModelBase, IDialogViewModel
+    {
+        private bool? _result;
+        public bool? Result
+        {
+            get { return _result; }
+            set { SetProperty(ref _result, value); }
+        }
+    }
 }

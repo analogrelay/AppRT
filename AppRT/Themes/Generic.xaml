@@ -29,6 +29,7 @@
                             <TextBlock Grid.Column="1" Style="{StaticResource PageHeaderTextStyle}" Text="{TemplateBinding PageTitle}" />
                             <ContentPresenter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="{TemplateBinding Header}" />
                             <ContentPresenter Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="{TemplateBinding Content}" />
+                            <Grid Name="PART_PopupHost" />
                         </Grid>
                     </Border>
                 </ControlTemplate>

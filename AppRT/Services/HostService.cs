@@ -20,6 +20,7 @@ namespace AppRT.Services
     {
         public virtual Rect Bounds { get { return Window.Bounds; } }
         public virtual Frame Frame { get; private set; }
+        public virtual Panel PopupHost { get; private set; }
 
         protected virtual Window Window { get { return Window.Current; } }
 
@@ -29,6 +30,11 @@ namespace AppRT.Services
             bus.Listen<ApplicationSitedMessage>()
                .ObserveOn(RxApp.DeferredScheduler)
                .Subscribe(s => Frame = s.RootFrame);
+
+            // Listen for the message which attaches a popup host.
+            bus.Listen<PopupHostReadyMessage>()
+               .ObserveOn(RxApp.DeferredScheduler)
+               .Subscribe(m => PopupHost = m.PopupHost);
         }
     }
 }
