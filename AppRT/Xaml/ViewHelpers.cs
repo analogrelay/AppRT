@@ -24,12 +24,12 @@ namespace AppRT.Xaml
                 Path = new PropertyPath("ViewModel"),
                 Source = viewControl
             });
-
             Application.SatisfyImports(viewControl);
             viewControl.ViewModelType = conventions.ViewToViewModel.GetViewModelForView(viewControl.GetType());
             if (viewControl.ViewModelType != null)
             {
                 viewControl.ViewModel = conventions.ViewModelBuilder.ConstructViewModel(viewControl.ViewModelType);
+                viewControl.DataContext = viewControl.ViewModel;
             }
 
             if (!DesignMode.DesignModeEnabled)

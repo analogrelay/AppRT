@@ -22,6 +22,8 @@ namespace AppRT.Services
     [Export]
     public class UIService
     {
+        private Flyout _activePopup;
+
         public HostService Host { get; private set; }
         public ObjectFactory Factory { get; private set; }
 
@@ -32,8 +34,20 @@ namespace AppRT.Services
             Host = host;
         }
 
+        public virtual void DismissPopup()
+        {
+            _activePopup.IsOpen = false;
+            _activePopup = null;
+        }
+
         public virtual Task<T> ShowPopupAsync<T>(PlacementMode placement) where T : IDialogViewModel
         {
+            if (_activePopup != null && _activePopup.IsOpen)
+            {
+                throw new InvalidOperationException("Cannot open multiple popups.");
+            }
+            
+
             // Construct the view
             TaskCompletionSource<T> tcs = new TaskCompletionSource<T>();
             UIElement viewControl = Factory.CreateViewForViewModel(typeof(T));
@@ -44,7 +58,7 @@ namespace AppRT.Services
             }
             
             // Construct the flyout
-            Flyout fly = new Flyout()
+            Flyout fly = _activePopup = new Flyout()
             {
                 Content = viewControl,
                 Placement = placement,

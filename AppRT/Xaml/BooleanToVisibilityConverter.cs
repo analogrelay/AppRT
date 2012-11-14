@@ -14,7 +14,12 @@ namespace AppRT.Xaml
         {
             if (targetType == typeof(Visibility) && value is bool)
             {
-                return (bool)value ? Visibility.Visible : Visibility.Collapsed;
+                bool val = (bool)value;
+                if (String.Equals(parameter as string, "!"))
+                {
+                    return val = !val;
+                }
+                return val ? Visibility.Visible : Visibility.Collapsed;
             }
             return null;
         }
