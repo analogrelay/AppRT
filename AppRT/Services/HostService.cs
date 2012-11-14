@@ -27,7 +27,7 @@ namespace AppRT.Services
         public void Register(IMessageBus bus)
         {
             // Listen for the message which attaches a frame.
-            bus.Listen<ApplicationSitedMessage>()
+            bus.Listen<ApplicationInitializedMessage>()
                .ObserveOn(RxApp.DeferredScheduler)
                .Subscribe(s => Frame = s.RootFrame);
 

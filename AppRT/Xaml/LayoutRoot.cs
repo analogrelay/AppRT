@@ -62,7 +62,9 @@ namespace AppRT.Xaml
             Panel p = GetTemplateChild(PopupHostPartName) as Panel;
             if (p != null && !DesignMode.DesignModeEnabled)
             {
-                Application.GetService<IMessageBus>()
+                Application.Current
+                           .Factory
+                           .GetService<IMessageBus>()
                            .SendMessage(new PopupHostReadyMessage(p));
             }
         }

@@ -12,6 +12,7 @@ using System.Composition;
 using ReactiveUI;
 using Windows.ApplicationModel;
 using AppRT.Messaging;
+using AppRT.Services;
 
 namespace AppRT.Xaml
 {
@@ -26,6 +27,14 @@ namespace AppRT.Xaml
         [Import]
         public IMessageBus Bus { get; set; }
 
+        [Import]
+        public ObjectFactory Factory { get; set; }
+
+        public static new Application Current
+        {
+            get { return Windows.UI.Xaml.Application.Current as AppRT.Xaml.Application; }
+        }
+
         protected abstract Type MainViewModelType { get; }
 
         protected Application(params ApplicationPlugin[] plugins)
@@ -33,66 +42,6 @@ namespace AppRT.Xaml
             _plugins = plugins;
             Compose();
             Suspending += OnSuspending;
-        }
-
-        public static void SatisfyImports(object objectWithLooseImports)
-        {
-            if (!DesignMode.DesignModeEnabled)
-            {
-                var app = Windows.UI.Xaml.Application.Current as Application;
-                if (app == null)
-                {
-                    throw new InvalidOperationException("Cannot SatisfyImports, the Application doesn't inherit from AppRT.Application!");
-                }
-                app._container.SatisfyImports(objectWithLooseImports);
-            }
-        }
-
-        public static object GetService(Type serviceType)
-        {
-            if (DesignMode.DesignModeEnabled)
-            {
-                return Activator.CreateInstance(serviceType);
-            }
-            else
-            {
-                var app = Windows.UI.Xaml.Application.Current as Application;
-                if (app == null)
-                {
-                    throw new InvalidOperationException("Cannot GetService, the Application doesn't inherit from AppRT.Application!");
-                }
-                try
-                {
-                    return app._container.GetExport(serviceType);
-                }
-                catch (CompositionFailedException cfex)
-                {
-                    ExceptionReporter.Report(cfex);
-                    return null;
-                }
-            }
-        }
-
-        public static T GetService<T>()
-        {
-            return (T)GetService(typeof(T));
-        }
-
-        public static IEnumerable<T> GetServices<T>()
-        {
-            if (DesignMode.DesignModeEnabled)
-            {
-                return Enumerable.Empty<T>();
-            }
-            else
-            {
-                var app = Windows.UI.Xaml.Application.Current as Application;
-                if (app == null)
-                {
-                    throw new InvalidOperationException("Cannot GetService, the Application doesn't inherit from AppRT.Application!");
-                }
-                return app._container.GetExports<T>();
-            }
         }
 
         protected void Compose()
@@ -124,7 +73,7 @@ namespace AppRT.Xaml
                 Window.Current.Content = rootFrame;
             }
 
-            Bus.SendMessage(new ApplicationSitedMessage(rootFrame));
+            Bus.SendMessage(new ApplicationInitializedMessage(rootFrame, _container));
 
             // Initialize the main view, if we haven't already restored a saved navigation stack
             if (rootFrame.Content == null)

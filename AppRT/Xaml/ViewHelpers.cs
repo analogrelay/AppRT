@@ -10,6 +10,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using ReactiveUI;
+using AppRT.Services;
 
 namespace AppRT.Xaml
 {
@@ -17,19 +18,19 @@ namespace AppRT.Xaml
     {
         public static void InitializeView<T>(T viewControl) where T : Control, IView
         {
-            var conventions = Application.GetService<ConventionManager>();
+            var factory = Application.Current.Factory;
 
             viewControl.SetBinding(Control.DataContextProperty, new Binding()
             {
                 Path = new PropertyPath("ViewModel"),
                 Source = viewControl
             });
-            Application.SatisfyImports(viewControl);
-            viewControl.ViewModelType = conventions.ViewToViewModel.GetViewModelForView(viewControl.GetType());
+            factory.SatisfyImports(viewControl);
+            viewControl.ViewModel = factory.CreateViewModelForView(viewControl.GetType());
+            viewControl.DataContext = viewControl.ViewModel;
+            viewControl.ViewModelType = viewControl.ViewModel == null ? null : viewControl.ViewModel.GetType();
             if (viewControl.ViewModelType != null)
             {
-                viewControl.ViewModel = conventions.ViewModelBuilder.ConstructViewModel(viewControl.ViewModelType);
-                viewControl.DataContext = viewControl.ViewModel;
             }
 
             if (!DesignMode.DesignModeEnabled)
@@ -40,7 +41,7 @@ namespace AppRT.Xaml
 
         static void OnCommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
         {
-            var sources = Application.GetServices<GlobalSettingsCommandSource>();
+            var sources = Application.Current.Factory.GetServices<GlobalSettingsCommandSource>();
             foreach (var command in sources.SelectMany(src => src.GetGlobalCommands()))
             {
                 args.Request.ApplicationCommands.Add(command);

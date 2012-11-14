@@ -13,21 +13,18 @@ namespace AppRT.Conventions
     {
         public ViewModelToViewConvention ViewModelToView { get; private set; }
         public ViewToViewModelConvention ViewToViewModel { get; private set; }
-        public ViewModelBuilder ViewModelBuilder { get; private set; }
-
-        public ConventionManager() : this(null, null, null)
+        
+        public ConventionManager() : this(null, null)
         {
         }
 
         [ImportingConstructor]
         public ConventionManager(
             [Import(AllowDefault = true)] ViewModelToViewConvention viewModelToView,
-            [Import(AllowDefault = true)] ViewToViewModelConvention viewToViewModel,
-            [Import(AllowDefault = true)] ViewModelBuilder viewModelBuilder)
+            [Import(AllowDefault = true)] ViewToViewModelConvention viewToViewModel)
         {
             ViewModelToView = viewModelToView ?? new ViewModelToViewConvention();
             ViewToViewModel = viewToViewModel ?? new ViewToViewModelConvention();
-            ViewModelBuilder = viewModelBuilder ?? new ViewModelBuilder();
         }
     }
 }

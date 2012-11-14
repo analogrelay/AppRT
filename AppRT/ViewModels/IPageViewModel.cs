@@ -26,7 +26,7 @@ namespace AppRT.ViewModels
             get { return _goBackCommand; }
         }
 
-        protected PageViewModelBase() : this(DesignMode.DesignModeEnabled ? null : Application.GetService<NavigationService>()) { }
+        protected PageViewModelBase() : this(DesignMode.DesignModeEnabled ? null : Application.Current.Factory.GetService<NavigationService>()) { }
         protected PageViewModelBase(NavigationService nav)
         {
             if (nav != null)
@@ -51,7 +51,7 @@ namespace AppRT.ViewModels
             get { return _goBackCommand; }
         }
 
-        protected PageViewModelBase() : this(DesignMode.DesignModeEnabled ? null : Application.GetService<NavigationService>()) { }
+        protected PageViewModelBase() : this(DesignMode.DesignModeEnabled ? null : Application.Current.Factory.GetService<NavigationService>()) { }
         protected PageViewModelBase(NavigationService nav)
         {
             if (nav != null)

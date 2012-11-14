@@ -113,7 +113,7 @@
     <Compile Include="Xaml\Application.cs" />
     <Compile Include="ApplicationPlugin.cs" />
     <Compile Include="ExceptionReporter.cs" />
-    <Compile Include="Messaging\ApplicationSitedMessage.cs" />
+    <Compile Include="Messaging\ApplicationInitializedMessage.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\UIService.cs" />
     <Compile Include="ViewModels\IInvocableViewModel.cs" />
@@ -135,7 +135,6 @@
     <Compile Include="Xaml\SwapView.cs" />
     <Compile Include="Xaml\ViewHelpers.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Conventions\ViewModelBuilder.cs" />
     <Compile Include="Conventions\ViewModelToViewConvention.cs" />
     <Compile Include="Xaml\ViewPage.cs" />
     <Compile Include="Conventions\ViewToViewModelConvention.cs" />
